@@ -1,0 +1,15 @@
+# Standard tagging policy applied by `cloud-tag check` and `cloud-tag apply`.
+tags:
+  - key: Environment
+    required: true
+    case: lower
+    allowed_values: [prod, staging, dev]
+
+  - key: Owner
+    required: true
+    case: lower
+    default: unassigned
+
+  - key: CostCenter
+    required: false
+    case: upper
