@@ -1,7 +1,6 @@
-# cloud-tagging-cli
+# Cloud resource tagging CLI
 
-A CLI that checks cloud resources against a standard tagging policy and
-bulk-fixes the violations it can fix safely.
+A Python CLI that checks and bulk-fixes AWS resource tags. Azure and GCP remain interface-only stubs that raise `NotImplementedError`. Validation uses fakes in CI.
 
 ## Problem
 
@@ -11,7 +10,7 @@ at all. This tool defines one standard-tags policy, reports who's out of
 line (`check`), and brings them into line (`apply`), without ever guessing
 a value it can't justify.
 
-## Scope, honestly
+## Scope
 
 Only **AWS** has a real adapter, built on the
 [Resource Groups Tagging API](https://docs.aws.amazon.com/resourcegroupstaggingapi/latest/APIReference/)
@@ -85,7 +84,7 @@ tags:
     case: upper
 ```
 
-## Limits
+## Known limitations
 
 - Only AWS has working code against a real API shape; Azure/GCP are stubs.
 - `apply` never guesses a disallowed or missing-with-no-default value — it
@@ -110,7 +109,7 @@ tags. When the diff is empty, no `set_tags`/`TagResources` call is made.
 Running `apply --apply` twice in a row produces zero additional API calls
 on the second run — covered by `test_apply_is_idempotent_on_second_run`.
 
-## Testing status
+## Validation level
 
 Tested: rule engine (all four violation kinds, including negative cases),
 config loading (valid + four malformed-config negative cases), the AWS
