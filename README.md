@@ -13,7 +13,7 @@ a value it can't justify.
 ## Scope
 
 Only **AWS** has a real adapter, built on the
-[Resource Groups Tagging API](https://docs.aws.amazon.com/resourcegroupstaggingapi/latest/APIReference/)
+[Resource Groups Tagging API](https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/)
 (`GetResources` / `TagResources`), which is why one adapter covers every
 taggable AWS resource type instead of needing a client per service.
 
@@ -120,3 +120,11 @@ with that same fake client injected. 29 tests, all passing.
 Not tested: real AWS (no network calls anywhere in the suite), Azure/GCP
 (interface-only, verified only to raise `NotImplementedError`), and
 large-scale pagination/throttling behavior beyond what the fake simulates.
+
+Run the same checks as CI (no AWS credentials needed):
+
+```bash
+pip install -e . ruff pytest
+ruff check .
+pytest -q
+```
